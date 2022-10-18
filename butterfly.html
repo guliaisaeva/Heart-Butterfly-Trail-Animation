@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Flower cursor animation</title>
+    <style>
+      body {
+        margin: 0;
+        box-sizing: border-box;
+        background-color: black;
+        height: 100vh;
+      }
+      span {
+        width: 100px;
+        height: 100px;
+        background: url("https://cdn3.iconfinder.com/data/icons/spring-2-1/30/Butterfly-1-512.png");
+        background-size: cover;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, 50%);
+        pointer-events: none;
+        animation: animate 10s linear;
+      }
+      @keyframes animate {
+        0% {
+          transform: translate(-50%, -50%);
+          opacity: 1;
+          filter: hue-rotate(0);
+        }
+        100% {
+          transform: translate(-50%, -5000%);
+          opacity: 0;
+          filter: hue-rotate(720deg);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <span></span>
+    <script>
+      const bodyElement = document.querySelector("body");
+      console.log(bodyElement);
+      bodyElement.addEventListener("mousemove", (event) => {
+        console.log(event);
+        const posX = event.offsetX;
+        const posY = event.offsetY;
+        const spanElement = document.createElement("span");
+        spanElement.style.left = posX + "px";
+        spanElement.style.top = posY + "px";
+        const size = Math.random() * 100;
+        spanElement.style.width = size + "px";
+        spanElement.style.height = size + "px";
+        bodyElement.appendChild(spanElement);
+        setTimeout(() => {
+          spanElement.remove();
+        }, 3000);
+      });
+    </script>
+  </body>
+</html>
